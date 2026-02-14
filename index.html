@@ -5,38 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>En Anbirkku...</title>
     <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ff85a1;
+            --bg: #0a0a0a;
+        }
+
         body {
-            background-color: #0b0b0b;
-            color: #ff4d6d;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            margin: 0;
+        }
+
+        /* Animated Floating Hearts Background */
+        .hearts {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: var(--primary);
+            opacity: 0.5;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Poem Container with Glass Effect */
+        #poem-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 77, 109, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            width: 85%;
+            max-width: 500px;
             text-align: center;
-            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none; /* Hidden until button click */
         }
+
         #poem-container {
+            color: #fff;
+            font-size: 1.1rem;
+            line-height: 2;
             white-space: pre-line;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            max-width: 600px;
-            border: 1px solid #ff4d6d;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 77, 109, 0.2);
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
         }
+
+        /* Romantic Button */
         #start-btn {
-            padding: 15px 30px;
-            font-size: 1rem;
-            background: #ff4d6d;
+            padding: 18px 35px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
             cursor: pointer;
-            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.3s;
+            z-index: 10;
+        }
+
+        #start-btn:hover { transform: scale(1.1); }
+
+        .signature {
+            margin-top: 25px;
+            font-weight: bold;
+            color: var(--secondary);
+            font-style: italic;
         }
     </style>
 </head>
@@ -44,17 +92,23 @@
 
     <button id="start-btn">Click to Open My Heart ❤️</button>
     <audio id="bg-voice" src="voice.m4a"></audio>
-    <div id="poem-container"></div>
+
+    <div id="poem-wrapper">
+        <div id="poem-container"></div>
+    </div>
 
     <script>
         const poemText = `என் அன்பிற்கு...
 
 நீ வந்த பிறகுதான்...
 அர்த்தமில்லாமல் ஓடிக்கொண்டிருந்த என் வாழ்க்கைக்கு,
-அழகான ஒரு அர்த்தம் கிடைத்தது நீ வந்த பிறகுதான்!
+அழகான ஒரு அர்த்தம் கிடைத்தது!
 
-பெரிய பெரிய சாதனைகள் தேவையில்லை எனக்கு,
-உன்னோடு பகிரும் அந்தச் சிறு சிறு தருணங்களே போதும்!
+வெறும் மூச்சுக் காற்றாய் இருந்த எனக்குள்,
+உயிர் ஓவியமாய் நீ வந்து சேர்ந்தாய்.
+
+பெரிய சாதனைகள் தேவையில்லை எனக்கு,
+உன்னோடு பகிரும் சிறு சிறு தருணங்களே போதும்!
 
 உன் ஒரு நொடி சிரிப்பு, 
 நீ கோபத்தில் சுருக்கும் உன் புருவம், 
@@ -65,20 +119,38 @@
 என்றும் உன் அன்புடன்,
 உன் காதலன்`;
 
-        let i = 0;
-        const speed = 100; // Adjust speed here
+        // Floating Hearts Generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
 
+        setInterval(createHeart, 300);
+
+        // Typewriter Logic
+        let i = 0;
         function typeWriter() {
             if (i < poemText.length) {
                 document.getElementById("poem-container").innerHTML += poemText.charAt(i);
                 i++;
-                setTimeout(typeWriter, speed);
+                setTimeout(typeWriter, 80); // Speed of typing
             }
         }
 
         document.getElementById('start-btn').addEventListener('click', function() {
             this.style.display = 'none';
-            document.getElementById('bg-voice').play();
+            document.getElementById('poem-wrapper').style.display = 'block';
+            
+            // Audio Playback
+            const audio = document.getElementById('bg-voice');
+            audio.play().catch(e => console.log("Audio play blocked by browser"));
+            
             typeWriter();
         });
     </script>
