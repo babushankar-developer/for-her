@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Valentine's Day ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arima:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary: #ff4d6d;
             --secondary: #ff85a1;
-            --overlay: rgba(0, 0, 0, 0.6); /* Darkens bg for text readability */
+            --overlay: rgba(0, 0, 0, 0.6);
         }
 
         body {
             margin: 0;
             overflow: hidden;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            /* Applying the cute font globally */
+            font-family: 'Arima', system-ui, -apple-system, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            /* BACKGROUND IMAGE SETTINGS */
             background: linear-gradient(var(--overlay), var(--overlay)), 
-                        url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a5?q=80&w=2070&auto=format&fit=crop'); 
+                        url('bg.jpeg'); 
             background-size: cover;
             background-position: center;
         }
@@ -45,7 +47,7 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 25px;
             padding: 30px;
             width: 85%;
@@ -58,19 +60,22 @@
 
         #poem-container {
             color: #fff;
-            font-size: 1.1rem;
-            line-height: 1.8;
+            /* Font size adjusted for the new font style */
+            font-size: 1.25rem; 
+            line-height: 1.6;
             white-space: pre-line;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: 400;
         }
 
         #wish {
-            margin-top: 20px;
-            font-size: 1.4rem;
+            margin-top: 25px;
+            font-size: 1.6rem;
             color: var(--secondary);
-            font-weight: bold;
-            display: none; /* Hidden until poem finishes */
-            animation: fadeIn 2s;
+            font-weight: 700;
+            display: none;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.8);
+            animation: fadeIn 2s ease-in;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -78,14 +83,20 @@
         #start-btn {
             padding: 20px 40px;
             font-size: 1.3rem;
-            background: var(--primary);
+            font-family: 'Arima', sans-serif;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 20px var(--primary);
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.4);
             transition: 0.3s;
             z-index: 20;
+            font-weight: 700;
+        }
+
+        #start-btn:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -107,8 +118,8 @@
 அழகான ஒரு அர்த்தம் கிடைத்தது!
 
 உன்னோடு பகிரும் சிறு சிறு தருணங்களே போதும்!
-உன் சிரிப்பு, உன் கோபம்... 
-இவைதான் என் வாழ்வின் பொக்கிஷங்கள்!
+உன் ஒரு நொடி சிரிப்பு, உன் செல்லக் கோபம்... 
+இவைதான் என் வாழ்வின் மிகப்பெரிய பொக்கிஷங்கள்!
 
 நீ என் ஒவ்வொரு நாளையும் அழகாக்கும் என் தேவதை!
 
@@ -131,9 +142,11 @@
             if (i < poemText.length) {
                 document.getElementById("poem-container").innerHTML += poemText.charAt(i);
                 i++;
-                setTimeout(typeWriter, 70);
+                setTimeout(typeWriter, 80);
             } else {
-                document.getElementById('wish').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('wish').style.display = 'block';
+                }, 500);
             }
         }
 
