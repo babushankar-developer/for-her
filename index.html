@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Anbirkku...</title>
+    <style>
+        body {
+            background-color: #0b0b0b;
+            color: #ff4d6d;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+        #poem-container {
+            white-space: pre-line;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 600px;
+            border: 1px solid #ff4d6d;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.2);
+        }
+        #start-btn {
+            padding: 15px 30px;
+            font-size: 1rem;
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="start-btn">Click to Open My Heart ❤️</button>
+    <audio id="bg-voice" src="voice.m4a"></audio>
+    <div id="poem-container"></div>
+
+    <script>
+        const poemText = `என் அன்பிற்கு...
+
+நீ வந்த பிறகுதான்...
+அர்த்தமில்லாமல் ஓடிக்கொண்டிருந்த என் வாழ்க்கைக்கு,
+அழகான ஒரு அர்த்தம் கிடைத்தது நீ வந்த பிறகுதான்!
+
+பெரிய பெரிய சாதனைகள் தேவையில்லை எனக்கு,
+உன்னோடு பகிரும் அந்தச் சிறு சிறு தருணங்களே போதும்!
+
+உன் ஒரு நொடி சிரிப்பு, 
+நீ கோபத்தில் சுருக்கும் உன் புருவம், 
+மழலைச் சொற்கள்... இவைதான் என் பொக்கிஷங்கள்!
+
+நீ என் ஒவ்வொரு நாளையும் அழகாக்கும் என் தேவதை!
+
+என்றும் உன் அன்புடன்,
+உன் காதலன்`;
+
+        let i = 0;
+        const speed = 100; // Adjust speed here
+
+        function typeWriter() {
+            if (i < poemText.length) {
+                document.getElementById("poem-container").innerHTML += poemText.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        document.getElementById('start-btn').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('bg-voice').play();
+            typeWriter();
+        });
+    </script>
+</body>
+</html>
