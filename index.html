@@ -3,98 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>En Anbirkku...</title>
+    <title>Happy Valentine's Day ❤️</title>
     <style>
         :root {
             --primary: #ff4d6d;
             --secondary: #ff85a1;
-            --bg: #0a0a0a;
+            --overlay: rgba(0, 0, 0, 0.6); /* Darkens bg for text readability */
         }
 
         body {
-            background-color: var(--bg);
             margin: 0;
-            overflow-x: hidden;
+            overflow: hidden;
             font-family: 'Segoe UI', Arial, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            /* BACKGROUND IMAGE SETTINGS */
+            background: linear-gradient(var(--overlay), var(--overlay)), 
+                        url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a5?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
         }
 
-        /* Animated Floating Hearts Background */
-        .hearts {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
+        /* Floating Hearts */
         .heart {
             position: absolute;
             color: var(--primary);
-            opacity: 0.5;
-            animation: float 6s infinite linear;
+            opacity: 0.6;
+            z-index: 1;
+            pointer-events: none;
+            animation: float 5s infinite linear;
         }
 
         @keyframes float {
-            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        /* Poem Container with Glass Effect */
         #poem-wrapper {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 77, 109, 0.3);
-            border-radius: 20px;
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 30px;
             width: 85%;
-            max-width: 500px;
+            max-width: 450px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            display: none; /* Hidden until button click */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 10;
         }
 
         #poem-container {
             color: #fff;
             font-size: 1.1rem;
-            line-height: 2;
+            line-height: 1.8;
             white-space: pre-line;
-            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         }
 
-        /* Romantic Button */
+        #wish {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            font-weight: bold;
+            display: none; /* Hidden until poem finishes */
+            animation: fadeIn 2s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         #start-btn {
-            padding: 18px 35px;
-            font-size: 1.2rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            background: var(--primary);
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-            transition: transform 0.3s;
-            z-index: 10;
-        }
-
-        #start-btn:hover { transform: scale(1.1); }
-
-        .signature {
-            margin-top: 25px;
-            font-weight: bold;
-            color: var(--secondary);
-            font-style: italic;
+            box-shadow: 0 0 20px var(--primary);
+            transition: 0.3s;
+            z-index: 20;
         }
     </style>
 </head>
 <body>
 
-    <button id="start-btn">Click to Open My Heart ❤️</button>
+    <button id="start-btn">Open My Heart ❤️</button>
     <audio id="bg-voice" src="voice.m4a"></audio>
 
     <div id="poem-wrapper">
         <div id="poem-container"></div>
+        <div id="wish">Happy Valentine's Day, My Love! 🌹</div>
     </div>
 
     <script>
@@ -104,53 +106,41 @@
 அர்த்தமில்லாமல் ஓடிக்கொண்டிருந்த என் வாழ்க்கைக்கு,
 அழகான ஒரு அர்த்தம் கிடைத்தது!
 
-வெறும் மூச்சுக் காற்றாய் இருந்த எனக்குள்,
-உயிர் ஓவியமாய் நீ வந்து சேர்ந்தாய்.
-
-பெரிய சாதனைகள் தேவையில்லை எனக்கு,
 உன்னோடு பகிரும் சிறு சிறு தருணங்களே போதும்!
-
-உன் ஒரு நொடி சிரிப்பு, 
-நீ கோபத்தில் சுருக்கும் உன் புருவம், 
-மழலைச் சொற்கள்... இவைதான் என் பொக்கிஷங்கள்!
+உன் சிரிப்பு, உன் கோபம்... 
+இவைதான் என் வாழ்வின் பொக்கிஷங்கள்!
 
 நீ என் ஒவ்வொரு நாளையும் அழகாக்கும் என் தேவதை!
 
 என்றும் உன் அன்புடன்,
 உன் காதலன்`;
 
-        // Floating Hearts Generator
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
             document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
+            setTimeout(() => heart.remove(), 5000);
         }
+        setInterval(createHeart, 400);
 
-        setInterval(createHeart, 300);
-
-        // Typewriter Logic
         let i = 0;
         function typeWriter() {
             if (i < poemText.length) {
                 document.getElementById("poem-container").innerHTML += poemText.charAt(i);
                 i++;
-                setTimeout(typeWriter, 80); // Speed of typing
+                setTimeout(typeWriter, 70);
+            } else {
+                document.getElementById('wish').style.display = 'block';
             }
         }
 
         document.getElementById('start-btn').addEventListener('click', function() {
             this.style.display = 'none';
             document.getElementById('poem-wrapper').style.display = 'block';
-            
-            // Audio Playback
-            const audio = document.getElementById('bg-voice');
-            audio.play().catch(e => console.log("Audio play blocked by browser"));
-            
+            document.getElementById('bg-voice').play().catch(e => console.log("Audio play error"));
             typeWriter();
         });
     </script>
